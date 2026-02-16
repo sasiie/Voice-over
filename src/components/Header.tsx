@@ -4,11 +4,11 @@ import { useState } from 'react'
 import {
   ChevronDown,
   ChevronRight,
-  Home,
+  Users,
   Menu,
-  Network,
-  SquareFunction,
+  SquarePen,
   StickyNote,
+  TableOfContents,
   X,
 } from 'lucide-react'
 
@@ -63,7 +63,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <Home size={20} />
+            <Users size={20} />
             <span className="font-medium">Om oss</span>
           </Link>
 
@@ -78,8 +78,8 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <SquareFunction size={20} />
-            <span className="font-medium">Börja ny chatt</span>
+            <SquarePen size={20} />
+            <span className="font-medium">Börja ny chatt </span>
           </Link>
 
           
@@ -93,7 +93,7 @@ export default function Header() {
                   'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
               }}
             >
-              <StickyNote size={20} />
+              <TableOfContents size={20} />
               <span className="font-medium">Dina chattar</span>
             </Link>
             <button
