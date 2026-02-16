@@ -30,11 +30,9 @@ export default function Header() {
         </button>
         <h1 className="ml-4 text-xl font-semibold">
           <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
+            <p>
+              HEM
+            </p>
           </Link>
         </h1>
       </header>
@@ -66,7 +64,7 @@ export default function Header() {
             }}
           >
             <Home size={20} />
-            <span className="font-medium">Home</span>
+            <span className="font-medium">Hem</span>
           </Link>
 
           {/* Demo Links Start */}
@@ -81,7 +79,7 @@ export default function Header() {
             }}
           >
             <SquareFunction size={20} />
-            <span className="font-medium">Start - Server Functions</span>
+            <span className="font-medium">Börja ny chatt</span>
           </Link>
 
           <Link
@@ -94,7 +92,7 @@ export default function Header() {
             }}
           >
             <Network size={20} />
-            <span className="font-medium">Start - API Request</span>
+            <span className="font-medium">Sök efter chatt</span>
           </Link>
 
           <div className="flex flex-row justify-between">
@@ -108,7 +106,7 @@ export default function Header() {
               }}
             >
               <StickyNote size={20} />
-              <span className="font-medium">Start - SSR Demos</span>
+              <span className="font-medium">Dina chattar</span>
             </Link>
             <button
               className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
