@@ -5,6 +5,8 @@ import {
   Route as RouteIcon,
   Shield,
   Waves,
+  Volume2,
+  FolderKanban,
   Sparkles,
 } from "lucide-react";
 
@@ -13,7 +15,7 @@ export const Route = createFileRoute("/")({ component: App });
 function App() {
   const features = [
     {
-      icon: <Zap className="w-12 h-12 text-cyan-400" />,
+      icon: <Volume2 className="w-12 h-12 text-cyan-400" />,
       title: "Tala. Vi skriver.",
       description:
         "Slipp manuellt arbete. Vår AI omvandlar tal till text automatiskt så att du kan fokusera på innehållet istället för tangentbordet.",
@@ -25,7 +27,7 @@ function App() {
         "Varje ljudfil skapar en ny session som sparas i sidomenyn. Hitta snabbt tillbaka till tidigare transkriberingar.",
     },
     {
-      icon: <RouteIcon className="w-12 h-12 text-cyan-400" />,
+      icon: <FolderKanban className="w-12 h-12 text-cyan-400" />,
       title: "Byggd för produktivitet",
       description:
         "Perfekt för studenter, journalister och företag som behöver snabb och pålitlig dokumentation.",
