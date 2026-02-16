@@ -64,7 +64,7 @@ export default function Header() {
             }}
           >
             <Home size={20} />
-            <span className="font-medium">Hem</span>
+            <span className="font-medium">Om oss</span>
           </Link>
 
           {/* Demo Links Start */}
@@ -82,19 +82,7 @@ export default function Header() {
             <span className="font-medium">Börja ny chatt</span>
           </Link>
 
-          <Link
-            to="/demo/start/api-request"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Network size={20} />
-            <span className="font-medium">Sök efter chatt</span>
-          </Link>
-
+          
           <div className="flex flex-row justify-between">
             <Link
               to="/demo/start/ssr"
