@@ -1,24 +1,12 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from "@tanstack/react-router";
 import ChatList from "./chatList";
 import { useChats } from "../hooks/useChats";
-import { useState } from 'react'
-import {
-  ChevronDown,
-  ChevronRight,
-  Users,
-  Menu,
-  SquarePen,
-  StickyNote,
-  TableOfContents,
-  X,
-} from 'lucide-react'
+import { useState } from "react";
+import { Users, Menu, SquarePen, TableOfContents, X } from "lucide-react";
 
 export default function Header() {
   const { chats, activeChatId, setActiveChatId } = useChats();
-  const [isOpen, setIsOpen] = useState(false)
-  const [groupedExpanded, setGroupedExpanded] = useState<
-    Record<string, boolean>
-  >({})
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -32,16 +20,14 @@ export default function Header() {
         </button>
         <h1 className="ml-4 text-xl font-semibold">
           <Link to="/">
-            <p>
-              HEM
-            </p>
+            <p>HEM</p>
           </Link>
         </h1>
       </header>
 
       <aside
         className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
@@ -62,28 +48,26 @@ export default function Header() {
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                "flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2",
             }}
           >
             <Users size={20} />
             <span className="font-medium">Om oss</span>
           </Link>
 
-
           <Link
-            to="/demo/start/server-funcs"
+            to="/"
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                "flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2",
             }}
           >
             <SquarePen size={20} />
             <span className="font-medium">Börja ny chatt </span>
           </Link>
 
-          
           <div className="flex flex-row justify-between">
             <Link
               to="/"
@@ -91,28 +75,20 @@ export default function Header() {
               className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
               activeProps={{
                 className:
-                  'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                  "flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2",
               }}
             >
               <TableOfContents size={20} />
               <span className="font-medium">Dina chattar</span>
-              
             </Link>
             <ChatList
-        chats={chats}
-        activeChatId={activeChatId}
-        onSelect={setActiveChatId}
-      />
+              chats={chats}
+              activeChatId={activeChatId}
+              onSelect={setActiveChatId}
+            />
           </div>
-          {groupedExpanded.StartSSRDemo && (
-            <div className="flex flex-col ml-4">
-           
-            </div>
-          )}
-
-          
         </nav>
       </aside>
     </>
-  )
+  );
 }
