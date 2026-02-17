@@ -63,7 +63,7 @@ function App() {
           </p>
           <div className="flex flex-col items-center gap-4">
             <AudioFileUpload onFileSelect={setFile} />
-
+{/* Pausat din kod här för den var röd, och vi ska ändra knappkomponenten samt så ska fileuploader.tsx bli empty.tsx */}
             {/* <Button
               onClick={() =>
                 file && setMessage(`Filen "${file.name}" är redo!`)
