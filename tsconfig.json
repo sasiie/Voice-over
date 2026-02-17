@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "src/components/AudioFileUpload.jsx"],
+  "include": ["**/*.ts", "**/*.tsx", "src/components/AudioFileUpload.tsx"],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",
