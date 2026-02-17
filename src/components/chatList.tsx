@@ -6,29 +6,18 @@ type Props = {
   onSelect: (id: string) => void;
 };
 
-export default function ChatList({
-  chats,
-  activeChatId,
-  onSelect,
-}: Props) {
+export default function ChatList({ chats, activeChatId, onSelect }: Props) {
   return (
     <div>
-      {chats.map((chat) => (
-        <div
+      {chats.slice(0,3).map((chat) => (
+        <button
           key={chat.id}
           onClick={() => onSelect(chat.id)}
-          style={{
-            padding: "8px 10px",
-            borderRadius: 8,
-            cursor: "pointer",
-            background:
-              chat.id === activeChatId
-                ? "rgba(255,255,255,0.1)"
-                : "transparent",
-          }}
+          className={`w-full text-left px-3 py-2 rounded-lg transition 
+    ${chat.id === activeChatId ? "bg-white/10" : "hover:bg-slate-800"}`}
         >
           {chat.title}
-        </div>
+        </button>
       ))}
     </div>
   );
