@@ -5,8 +5,10 @@ import { useState } from "react";
 import { Users, Menu, SquarePen, TableOfContents, X } from "lucide-react";
 
 export default function Header() {
-  const { chats, activeChatId, setActiveChatId } = useChats();
+  const { chats, activeChatId, setActiveChatId, createChat } = useChats();
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log("CHATS:", chats);
 
   return (
     <>
@@ -48,7 +50,7 @@ export default function Header() {
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
             activeProps={{
               className:
-                "flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2",
+                "bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-3 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10",
             }}
           >
             <Users size={20} />
@@ -61,31 +63,39 @@ export default function Header() {
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
             activeProps={{
               className:
-                "flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2",
+                "bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-3 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10",
             }}
           >
             <SquarePen size={20} />
             <span className="font-medium">Börja ny chatt </span>
           </Link>
 
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col justify-between pt-22">
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
-              className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+              className="flex-1 flex items-center gap-3 p-3"
               activeProps={{
-                className:
-                  "flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2",
+                className: "border-b border-gray-700",
               }}
             >
               <TableOfContents size={20} />
               <span className="font-medium">Dina chattar</span>
             </Link>
+
             <ChatList
               chats={chats}
               activeChatId={activeChatId}
               onSelect={setActiveChatId}
             />
+            <button
+              className="text-white bg-cyan-600 px-3 py-2 rounded"
+              onClick={() =>
+                createChat("Testchat " + new Date().toLocaleTimeString())
+              }
+            >
+              Skapa testchat
+            </button>
           </div>
         </nav>
       </aside>
