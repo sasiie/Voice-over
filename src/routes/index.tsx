@@ -1,3 +1,7 @@
+import { useState } from "react";
+import AudioFileUpload from "../components/AudioFileUpload";
+import Button from "../components/Button";
+
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Zap,
@@ -31,6 +35,9 @@ function App() {
         "Perfekt för studenter, journalister och företag som behöver snabb och pålitlig dokumentation.",
     },
   ];
+const [file, setFile] = useState<File | null>(null);
+const [message, setMessage] = useState("");
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
@@ -54,15 +61,17 @@ function App() {
             systemet göra jobbet.
           </p>
           <div className="flex flex-col items-center gap-4">
-            <a
-              href="https://tanstack.com/start"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50"
-            >
-              Documentation
-            </a>
-          </div>
+  <AudioFileUpload onFileSelect={setFile} />
+
+  <Button
+   onClick={() => file && setMessage(`Filen "${file.name}" är redo!`)}
+    disabled={!file}
+    className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 disabled:opacity-50"
+  >
+    Transkribera
+  </Button>
+  {message && <p className="text-cyan-400 mt-4">{message}</p>}
+</div>
         </div>
       </section>
 
