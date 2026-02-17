@@ -1,6 +1,6 @@
 import { useRef, useState, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-
+// Denna kan vi tabort och använda empty.tsx i ui mappen. den är exakt en sådan här bara att de är en färdig komponent som vi tar från komponentbiblioteket
 type AudioFileUploadProps = {
   onFileSelect?: (file: File) => void;
 };
