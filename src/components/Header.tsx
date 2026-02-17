@@ -1,22 +1,14 @@
-import { Link } from '@tanstack/react-router'
-
-import { useState } from 'react'
-import {
-  ChevronDown,
-  ChevronRight,
-  Home,
-  Menu,
-  Network,
-  SquareFunction,
-  StickyNote,
-  X,
-} from 'lucide-react'
+import { Link } from "@tanstack/react-router";
+import ChatList from "./chatList";
+import { useChats } from "../hooks/useChats";
+import { useState } from "react";
+import { Users, Menu, SquarePen, TableOfContents, X } from "lucide-react";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [groupedExpanded, setGroupedExpanded] = useState<
-    Record<string, boolean>
-  >({})
+  const { chats, activeChatId, setActiveChatId, createChat } = useChats();
+  const [isOpen, setIsOpen] = useState(false);
+
+  console.log("CHATS:", chats);
 
   return (
     <>
@@ -30,16 +22,14 @@ export default function Header() {
         </button>
         <h1 className="ml-4 text-xl font-semibold">
           <Link to="/">
-            <p>
-              HEM
-            </p>
+            <p>HEM</p>
           </Link>
         </h1>
       </header>
 
       <aside
         className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
@@ -60,116 +50,55 @@ export default function Header() {
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                "bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-3 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10",
             }}
           >
-            <Home size={20} />
-            <span className="font-medium">Hem</span>
+            <Users size={20} />
+            <span className="font-medium">Om oss</span>
           </Link>
 
-          {/* Demo Links Start */}
-
           <Link
-            to="/demo/start/server-funcs"
+            to="/"
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
             activeProps={{
               className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                "bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-3 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10",
             }}
           >
-            <SquareFunction size={20} />
-            <span className="font-medium">Börja ny chatt</span>
+            <SquarePen size={20} />
+            <span className="font-medium">Börja ny chatt </span>
           </Link>
 
-          <Link
-            to="/demo/start/api-request"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Network size={20} />
-            <span className="font-medium">Sök efter chatt</span>
-          </Link>
-
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col justify-between pt-22">
             <Link
-              to="/demo/start/ssr"
+              to="/"
               onClick={() => setIsOpen(false)}
-              className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+              className="flex-1 flex items-center gap-3 p-3"
               activeProps={{
-                className:
-                  'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+                className: "border-b border-gray-700",
               }}
             >
-              <StickyNote size={20} />
+              <TableOfContents size={20} />
               <span className="font-medium">Dina chattar</span>
             </Link>
+
+            <ChatList
+              chats={chats}
+              activeChatId={activeChatId}
+              onSelect={setActiveChatId}
+            />
             <button
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+              className="text-white bg-cyan-600 px-3 py-2 rounded"
               onClick={() =>
-                setGroupedExpanded((prev) => ({
-                  ...prev,
-                  StartSSRDemo: !prev.StartSSRDemo,
-                }))
+                createChat("Testchat " + new Date().toLocaleTimeString())
               }
             >
-              {groupedExpanded.StartSSRDemo ? (
-                <ChevronDown size={20} />
-              ) : (
-                <ChevronRight size={20} />
-              )}
+              Skapa testchat
             </button>
           </div>
-          {groupedExpanded.StartSSRDemo && (
-            <div className="flex flex-col ml-4">
-              <Link
-                to="/demo/start/ssr/spa-mode"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">SPA Mode</span>
-              </Link>
-
-              <Link
-                to="/demo/start/ssr/full-ssr"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Full SSR</span>
-              </Link>
-
-              <Link
-                to="/demo/start/ssr/data-only"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Data Only</span>
-              </Link>
-            </div>
-          )}
-
-          {/* Demo Links End */}
         </nav>
       </aside>
     </>
-  )
+  );
 }
