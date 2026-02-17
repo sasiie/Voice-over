@@ -1,15 +1,21 @@
-import { useRef, useState } from "react";
-import Button from "./Button";
+import { useRef, useState, ChangeEvent } from "react";
+import { Button } from "@/components/ui/button";
 
-export default function AudioFileUpload({ onFileSelect }) {
-  const inputRef = useRef(null);
-  const [fileName, setFileName] = useState("");
+type AudioFileUploadProps = {
+  onFileSelect?: (file: File) => void;
+};
+
+export default function AudioFileUpload({
+  onFileSelect,
+}: AudioFileUploadProps) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [fileName, setFileName] = useState<string>("");
 
   function openFilePicker() {
     inputRef.current?.click();
   }
 
-  function handleChange(e) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -24,7 +30,6 @@ export default function AudioFileUpload({ onFileSelect }) {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      
       <Button
         type="button"
         onClick={openFilePicker}
