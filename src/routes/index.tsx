@@ -16,7 +16,6 @@ import {
 
 export const Route = createFileRoute("/")({ component: App });
 
-
 function App() {
   const features = [
     {
@@ -38,9 +37,8 @@ function App() {
         "Perfekt för studenter, journalister och företag som behöver snabb och pålitlig dokumentation.",
     },
   ];
-const [file, setFile] = useState<File | null>(null);
-const [message, setMessage] = useState("");
-
+  const [file, setFile] = useState<File | null>(null);
+  const [message, setMessage] = useState("");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
@@ -58,23 +56,24 @@ const [message, setMessage] = useState("");
             Förvandla ljud till text på sekunder
           </p>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-8">
-            Har du spelat in en föreläsning, intervju eller ett möte? <br />
-
-            – snabbt, enkelt och automatiskt. Ladda upp din fil och låt
-            systemet göra jobbet.
+            Har du spelat in en föreläsning, intervju eller ett möte? <br />–
+            snabbt, enkelt och automatiskt. Ladda upp din fil och låt systemet
+            göra jobbet.
           </p>
           <div className="flex flex-col items-center gap-4">
-  <AudioFileUpload onFileSelect={setFile} />
+            <AudioFileUpload onFileSelect={setFile} />
 
-  <Button
-   onClick={() => file && setMessage(`Filen "${file.name}" är redo!`)}
-    disabled={!file}
-    className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 disabled:opacity-50"
-  >
-    Transkribera
-  </Button>
-  {message && <p className="text-cyan-400 mt-4">{message}</p>}
-</div>
+            <Button
+              onClick={() =>
+                file && setMessage(`Filen "${file.name}" är redo!`)
+              }
+              disabled={!file}
+              className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 disabled:opacity-50"
+            >
+              Transkribera
+            </Button>
+            {message && <p className="text-cyan-400 mt-4">{message}</p>}
+          </div>
         </div>
       </section>
 
