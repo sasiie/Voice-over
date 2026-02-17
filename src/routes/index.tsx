@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
+
 export const Route = createFileRoute("/")({ component: App });
 
 function App() {
@@ -63,7 +64,7 @@ function App() {
           <div className="flex flex-col items-center gap-4">
             <AudioFileUpload onFileSelect={setFile} />
 
-            <Button
+            {/* <Button
               onClick={() =>
                 file && setMessage(`Filen "${file.name}" är redo!`)
               }
@@ -71,7 +72,7 @@ function App() {
               className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 disabled:opacity-50"
             >
               Transkribera
-            </Button>
+            </Button> */}
             {message && <p className="text-cyan-400 mt-4">{message}</p>}
           </div>
         </div>
