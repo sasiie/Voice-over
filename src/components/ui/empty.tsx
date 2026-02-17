@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority"
-
+// denna kan vi använda istället för fileuploader. du kan kolla på denna sidan: https://ui.shadcn.com/docs/components/radix/empty
 import { cn } from "@/lib/utils"
 
 function Empty({ className, ...props }: React.ComponentProps<"div">) {
