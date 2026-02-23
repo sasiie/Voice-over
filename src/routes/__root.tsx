@@ -1,4 +1,9 @@
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Scripts,
+  createRootRoute,
+  Link,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import {
@@ -13,6 +18,7 @@ import {
   SidebarTrigger,
   SidebarFooter,
 } from "@/components/ui/sidebar";
+import { SquarePen } from "lucide-react";
 
 //import Header from "../components/Header";
 
@@ -64,7 +70,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     </SidebarMenuItem>
 
                     <SidebarMenuItem>
-                      <SidebarMenuButton>Börja ny chatt</SidebarMenuButton>
+                      <SidebarMenuButton asChild>
+                        <Link to="/about">
+                          <SquarePen size={20} />
+                          <span className="font-medium">Börja ny chatt</span>
+                        </Link>
+                      </SidebarMenuButton>
                     </SidebarMenuItem>
                   </SidebarMenu>
                 </SidebarGroup>
