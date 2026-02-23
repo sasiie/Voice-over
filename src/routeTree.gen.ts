@@ -26,6 +26,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
 <<<<<<< HEAD
+<<<<<<< HEAD
   '/about': typeof AboutRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -34,10 +35,14 @@ export interface FileRoutesByFullPath {
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
   '/demo/start/ssr/': typeof DemoStartSsrIndexRoute
+=======
+  '/about': typeof AboutRoute
+>>>>>>> f12e4ee (DEMO: testar undersidor)
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+<<<<<<< HEAD
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -50,10 +55,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
 >>>>>>> 1117c5f (fixat localstorage)
+=======
+>>>>>>> f12e4ee (DEMO: testar undersidor)
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+<<<<<<< HEAD
 <<<<<<< HEAD
   '/about': typeof AboutRoute
   '/demo/api/names': typeof DemoApiNamesRoute
@@ -99,18 +107,27 @@ export interface FileRouteTypes {
     | '/demo/start/ssr/spa-mode'
     | '/demo/start/ssr/'
 =======
+=======
+  '/about': typeof AboutRoute
+>>>>>>> f12e4ee (DEMO: testar undersidor)
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about'
   fileRoutesByTo: FileRoutesByTo
+<<<<<<< HEAD
   to: '/'
   id: '__root__' | '/'
 >>>>>>> 1117c5f (fixat localstorage)
+=======
+  to: '/' | '/about'
+  id: '__root__' | '/' | '/about'
+>>>>>>> f12e4ee (DEMO: testar undersidor)
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+<<<<<<< HEAD
 <<<<<<< HEAD
   AboutRoute: typeof AboutRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
@@ -122,6 +139,9 @@ export interface RootRouteChildren {
   DemoStartSsrIndexRoute: typeof DemoStartSsrIndexRoute
 =======
 >>>>>>> 1117c5f (fixat localstorage)
+=======
+  AboutRoute: typeof AboutRoute
+>>>>>>> f12e4ee (DEMO: testar undersidor)
 }
 
 declare module '@tanstack/react-router' {
@@ -146,6 +166,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
 <<<<<<< HEAD
+<<<<<<< HEAD
   AboutRoute: AboutRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,
@@ -156,6 +177,9 @@ const rootRouteChildren: RootRouteChildren = {
   DemoStartSsrIndexRoute: DemoStartSsrIndexRoute,
 =======
 >>>>>>> 1117c5f (fixat localstorage)
+=======
+  AboutRoute: AboutRoute,
+>>>>>>> f12e4ee (DEMO: testar undersidor)
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
