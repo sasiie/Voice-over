@@ -19,7 +19,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { SquarePen } from "lucide-react";
-import { Header } from "@/components/ui/header";
+// import Header from "@/components/ui/header"
 import ChatList from "@/components/chatList";
 import { useChats } from "../hooks/useChats";
 
