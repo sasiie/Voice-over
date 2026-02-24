@@ -19,8 +19,9 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { SquarePen } from "lucide-react";
-
-//import Header from "../components/Header";
+import { Header } from "@/components/ui/header";
+import ChatList from "@/components/chatList";
+import { useChats } from "../hooks/useChats";
 
 import appCss from "../styles.css?url";
 
@@ -50,6 +51,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { chats, activeChatId, setActiveChatId, createChat } = useChats();
   return (
     <html lang="en">
       <head>
@@ -60,20 +62,27 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <div className="flex h-screen w-full">
             <Sidebar>
               <SidebarHeader>
-                <div className="px-2 py-2 font-semibold">VOICE-OVER</div>
+                <Link to="/">
+                  <div className="px-2 py-2 font-semibold">VOICE-OVER</div>
+                </Link>
               </SidebarHeader>
               <SidebarContent>
                 <SidebarGroup>
                   <SidebarMenu>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton>Om oss</SidebarMenuButton>
-                    </SidebarMenuItem>
+                    {/* <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link to="/">
+                          <SquarePen size={20} />
+                          <span className="font-medium">Börja ny chatt</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem> */}
 
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild>
                         <Link to="/about">
-                          <SquarePen size={20} />
-                          <span className="font-medium">Börja ny chatt</span>
+                          {/* <SquarePen size={20} /> */}
+                          <span className="font-medium">Om oss</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -84,6 +93,31 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                   <SidebarMenu>
                     <SidebarMenuItem>
                       <SidebarMenuButton>Dina chattar</SidebarMenuButton>
+                      <ChatList
+                        chats={chats}
+                        activeChatId={activeChatId}
+                        onSelect={setActiveChatId}
+                      />
+                      <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                          <Link to="/chats">
+                            {/* <SquarePen size={20} /> */}
+                            <span className="font-medium">
+                              Kolla dina chattar
+                            </span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      <button
+                        className="text-white bg-cyan-600 px-3 py-2 rounded"
+                        onClick={() =>
+                          createChat(
+                            "Testchat" + new Date().toLocaleTimeString(),
+                          )
+                        }
+                      >
+                        Börja ny chatt
+                      </button>
                     </SidebarMenuItem>
                   </SidebarMenu>
                 </SidebarGroup>
