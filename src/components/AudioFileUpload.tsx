@@ -1,8 +1,10 @@
 import { useRef, useState, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { Empty } from "@/components/ui/empty";
 
+// Denna kan vi tabort och använda empty.tsx i ui mappen. den är exakt en sådan här bara att de är en färdig komponent som vi tar från komponentbiblioteket
 type AudioFileUploadProps = {
-  onFileSelect?: (file: File) => void;
+  onFileSelect?: (file: File | null) => void;
 };
 
 export default function AudioFileUpload({
@@ -29,7 +31,7 @@ export default function AudioFileUpload({
   }
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <Empty className="border-slate-700 bg-slate-800/30 gap-3">
       <Button
         type="button"
         onClick={openFilePicker}
@@ -49,6 +51,6 @@ export default function AudioFileUpload({
       <p className="text-gray-400 text-sm">
         {fileName ? `Vald fil: ${fileName}` : "Ingen fil vald"}
       </p>
-    </div>
+    </Empty>
   );
 }
