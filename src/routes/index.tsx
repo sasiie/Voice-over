@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import {
   Zap,
   Server,
@@ -11,6 +12,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: App });
+
 
 function App() {
   const features = [
@@ -51,8 +53,8 @@ function App() {
           </p>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-8">
             Har du spelat in en föreläsning, intervju eller ett möte? <br />
-            Vår tjänst omvandlar dina ljudfiler till tydlig och redigerbar text{" "}
-            <br />– snabbt, enkelt och automatiskt. Ladda upp din fil och låt
+
+            – snabbt, enkelt och automatiskt. Ladda upp din fil och låt
             systemet göra jobbet.
           </p>
           <div className="flex flex-col items-center gap-4">

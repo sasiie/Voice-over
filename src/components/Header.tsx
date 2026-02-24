@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
-
+import ChatList from "./chatList";
+import { useChats } from "../hooks/useChats";
 import { useState } from 'react'
 import {
   ChevronDown,
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react'
 
 export default function Header() {
+  const { chats, activeChatId, setActiveChatId } = useChats();
   const [isOpen, setIsOpen] = useState(false)
   const [groupedExpanded, setGroupedExpanded] = useState<
     Record<string, boolean>
@@ -67,7 +69,6 @@ export default function Header() {
             <span className="font-medium">Om oss</span>
           </Link>
 
-          {/* Demo Links Start */}
 
           <Link
             to="/demo/start/server-funcs"
@@ -85,7 +86,7 @@ export default function Header() {
           
           <div className="flex flex-row justify-between">
             <Link
-              to="/demo/start/ssr"
+              to="/"
               onClick={() => setIsOpen(false)}
               className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
               activeProps={{
@@ -95,67 +96,21 @@ export default function Header() {
             >
               <TableOfContents size={20} />
               <span className="font-medium">Dina chattar</span>
+              
             </Link>
-            <button
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              onClick={() =>
-                setGroupedExpanded((prev) => ({
-                  ...prev,
-                  StartSSRDemo: !prev.StartSSRDemo,
-                }))
-              }
-            >
-              {groupedExpanded.StartSSRDemo ? (
-                <ChevronDown size={20} />
-              ) : (
-                <ChevronRight size={20} />
-              )}
-            </button>
+            <ChatList
+        chats={chats}
+        activeChatId={activeChatId}
+        onSelect={setActiveChatId}
+      />
           </div>
           {groupedExpanded.StartSSRDemo && (
             <div className="flex flex-col ml-4">
-              <Link
-                to="/demo/start/ssr/spa-mode"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">SPA Mode</span>
-              </Link>
-
-              <Link
-                to="/demo/start/ssr/full-ssr"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Full SSR</span>
-              </Link>
-
-              <Link
-                to="/demo/start/ssr/data-only"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Data Only</span>
-              </Link>
+           
             </div>
           )}
 
-          {/* Demo Links End */}
+          
         </nav>
       </aside>
     </>
