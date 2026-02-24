@@ -58,7 +58,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <Header />
         <SidebarProvider>
           <div className="flex h-screen w-full">
             <Sidebar>
