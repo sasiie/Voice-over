@@ -7,6 +7,7 @@ import languages from "@/data/languages";
 
 import { Route as RouteIcon, Volume2, FolderKanban } from "lucide-react";
 
+
 export const Route = createFileRoute("/")({ component: App });
 
 function App() {
