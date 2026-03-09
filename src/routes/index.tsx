@@ -1,12 +1,11 @@
 import { useState } from "react";
 import AudioFileUpload from "@/components/AudioFileUpload";
-import Button from "@/components/Button";
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { transcribeSpeech } from "@/data/speechToText";
 import languages from "@/data/languages";
 
 import { Route as RouteIcon, Volume2, FolderKanban } from "lucide-react";
-
 
 export const Route = createFileRoute("/")({ component: App });
 
