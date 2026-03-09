@@ -1,70 +1,52 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router"
+import { useState } from "react"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-
-export const Route = createFileRoute('/chats')({
-  component: Chats,
+export const Route = createFileRoute("/chats")({
+  component: ChatsPage,
 })
 
-function Chats() {
+function ChatsPage() {
+  const [message, setMessage] = useState("")
+  const [messages, setMessages] = useState<string[]>([])
+
+  function handleSend() {
+    if (message.trim() === "") return
+
+    setMessages([...messages, message])
+    setMessage("")
+  }
+
   return (
-    <Tabs defaultValue="overview" className="w-[400px]">
-      <TabsList>
-        <TabsTrigger value="overview">Översikt</TabsTrigger>
-        <TabsTrigger value="analytics">Favoriter</TabsTrigger>
-        <TabsTrigger value="reports">Viktiga</TabsTrigger>
-      </TabsList>
-      <TabsContent value="overview">
-        <Card>
-          <CardHeader>
-            <CardTitle>Översikt</CardTitle>
-            <CardDescription>
-               Här kan du se alla dina chattar vi har transkriberat.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
-            20 chattar.
-          </CardContent>
-        </Card>
-      </TabsContent>
-      <TabsContent value="analytics">
-        <Card>
-          <CardHeader>
-            <CardTitle>Favoriter</CardTitle>
-            <CardDescription>
-              Här kan du sätta alla dina favoriter.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
-            12 chattar.
-          </CardContent>
-        </Card>
-      </TabsContent>
-      <TabsContent value="reports">
-        <Card>
-          <CardHeader>
-            <CardTitle>Viktiga</CardTitle>
-            <CardDescription>
-              Här kan du sätta alla viktiga chattar.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
-            8 chattar.
-          </CardContent>
-        </Card>
-      </TabsContent>
-    </Tabs>
+    <div className="min-h-screen bg-gray-900 text-white p-8">
+      <h1 className="text-3xl font-bold mb-6">New Chat</h1>
+
+      <div className="bg-gray-800 p-4 rounded-lg mb-4 min-h-[200px]">
+        {messages.length === 0 ? (
+          <p className="text-gray-400">No messages yet...</p>
+        ) : (
+          messages.map((msg, index) => (
+            <div key={index} className="mb-2 p-2 bg-gray-700 rounded">
+              {msg}
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type a message..."
+          className="flex-1 p-2 rounded bg-gray-700 text-white"
+        />
+        <button
+          onClick={handleSend}
+          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Send
+        </button>
+      </div>
+    </div>
   )
 }
