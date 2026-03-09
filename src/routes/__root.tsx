@@ -34,7 +34,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "Voice-over",
       },
     ],
     links: [
@@ -67,19 +67,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               <SidebarContent>
                 <SidebarGroup>
                   <SidebarMenu>
-                    {/* <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link to="/">
-                          <SquarePen size={20} />
-                          <span className="font-medium">Börja ny chatt</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem> */}
-
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild>
                         <Link to="/about">
-                          {/* <SquarePen size={20} /> */}
                           <span className="font-medium">Om oss</span>
                         </Link>
                       </SidebarMenuButton>
@@ -90,7 +80,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <SidebarGroup>
                   <SidebarMenu>
                     <SidebarMenuItem>
-                      <SidebarMenuButton>Dina chattar</SidebarMenuButton>
+                      <p>Dina chattar</p>
                       <ChatList
                         chats={chats}
                         activeChatId={activeChatId}
@@ -99,7 +89,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                       <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                           <Link to="/chats">
-                            {/* <SquarePen size={20} /> */}
                             <span className="font-medium">
                               Kolla dina chattar
                             </span>
