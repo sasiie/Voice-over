@@ -95,7 +95,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
-                      <button
+                      {/* <button
                         className="text-white bg-cyan-600 px-3 py-2 rounded"
                         onClick={() =>
                           createChat(
@@ -104,7 +104,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                         }
                       >
                         Börja ny chatt
-                      </button>
+                      </button> */}
                     </SidebarMenuItem>
                   </SidebarMenu>
                 </SidebarGroup>
