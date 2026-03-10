@@ -51,7 +51,7 @@ function App() {
 
       setMessage(transcript);
 
-      createChat({
+      const newChat = createChat({
         title: file.name,
         transcript,
         language,

@@ -12,6 +12,8 @@ export type Chat = {
   transcript: string;
   language: string;
   createdAt: string;
+  favorite: boolean;
+  pinned: boolean;
 };
 
 type ChatsContextType = {
@@ -25,6 +27,8 @@ type ChatsContextType = {
     language: string;
   }) => Chat;
   deleteChat: (id: string) => void;
+   toggleFavorite: (id: string) => void;
+  togglePinned: (id: string) => void;
 };
 
 const STORAGE_KEY = "my_chats";
@@ -66,13 +70,15 @@ export function ChatsProvider({ children }: { children: React.ReactNode }) {
     title: string;
     transcript: string;
     language: string;
-  }) {
+  }): Chat {
     const newChat: Chat = {
-      id: crypto.randomUUID(),
+      id: String(Date.now()) + Math.random().toString(16).slice(2),
       title: data.title,
       transcript: data.transcript,
       language: data.language,
       createdAt: new Date().toISOString(),
+      favorite: false,
+      pinned: false,
     };
 
     setChats((prev) => [newChat, ...prev]);
@@ -109,7 +115,22 @@ export function ChatsProvider({ children }: { children: React.ReactNode }) {
   //     chat.id === id ? {...chat, transcript } : chat
   //   )
   // ); }
+function toggleFavorite(id: string) {
+  setChats((prev) =>
+    prev.map((chat) =>
+      chat.id === id ? { ...chat, favorite: !chat.favorite } : chat
+    )
+  );
+}
 
+function togglePinned(id: string) {
+  setChats((prev) =>
+    prev.map((chat) =>
+      chat.id === id ? { ...chat, pinned: !chat.pinned } : chat
+    )
+  );
+}
+  
   const value = useMemo(
     () => ({
       chats,
@@ -118,6 +139,8 @@ export function ChatsProvider({ children }: { children: React.ReactNode }) {
       setActiveChatId,
       createChat,
       deleteChat,
+      toggleFavorite,
+      togglePinned,
     }),
     [chats, activeChatId, activeChat],
   );

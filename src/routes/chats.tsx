@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useChats } from "@/hooks/useChats";
+import { Pin, Star, Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/chats")({
   component: ChatsPage,
 });
 
 function ChatsPage() {
-  const { chats, activeChatId, setActiveChatId, activeChat, deleteChat } =
+  const { chats, activeChatId, setActiveChatId, activeChat, deleteChat, toggleFavorite,
+    togglePinned, } =
   useChats();
 
 
@@ -39,7 +41,7 @@ function ChatsPage() {
 
                 <div className="bg-gray-800 rounded-xl p-6">
                   {!activeChat ? (
-                    <p className="text-gray-400">Vaälj en chat i listan.</p>
+                    <p className="text-gray-400">Välj en chat i listan.</p>
                   ) : (
                     <>
 <div className="flex items-start justify-between gap-4 mb-4">
@@ -50,15 +52,39 @@ function ChatsPage() {
                       {new Date(activeChat.createdAt).toLocaleString("sv-SE")}
                     </p>
                   </div>
+<div className="flex items-center gap-2">
+    <button
+      onClick={() => toggleFavorite(activeChat.id)}
+      className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition ${
+        activeChat.favorite
+          ? "border-yellow-500/40 bg-yellow-500/10 text-yellow-300"
+          : "border-slate-700 text-slate-300 hover:bg-slate-800"
+      }`}
+    >
+      <Star size={16} />
+      {activeChat.favorite ? "Favorit" : "Favoritisera"}
+    </button>
 
+
+    <button
+      onClick={() => togglePinned(activeChat.id)}
+      className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition ${
+        activeChat.pinned
+          ? "border-cyan-500/40 bg-cyan-500/10 text-cyan-300"
+          : "border-slate-700 text-slate-300 hover:bg-slate-800"
+      }`}
+    >
+      <Pin size={16} />
+      {activeChat.pinned ? "Pinnad" : "Pinna"}
+    </button>
                   <button
                     onClick={() => deleteChat(activeChat.id)}
-                    className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg"
-                  >
+                    className="flex items-center gap-2 rounded-lg border border-red-500/30 px-4 py-2 text-sm text-red-400 transition hover:border-red-500 hover:bg-red-500/10 hover:text-red-300"
+                  > <Trash2 size={16} />
                     Radera
                   </button>
                 </div>
-
+</div>
                 <div className="whitespace-pre-wrap text-gray-200 leading-7">
                   {activeChat.transcript}
                 </div>
