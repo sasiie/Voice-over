@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useChats } from "@/hooks/useChats";
 import { Pin, Star, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import { useMemo } from "react";
 export const Route = createFileRoute("/chats")({
   component: ChatsPage,
 });
@@ -17,7 +17,15 @@ function ChatsPage() {
     toggleFavorite,
     togglePinned,
   } = useChats();
+const favoriteChats = useMemo(
+  () => chats.filter((chat) => chat.favorite),
+  [chats]
+);
 
+const pinnedChats = useMemo(
+  () => chats.filter((chat) => chat.pinned),
+  [chats]
+);
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <h1 className="text-3xl font-bold mb-6">Dina chattar</h1>

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Chat } from "../hooks/useChats";
 import { Pin, Star } from "lucide-react";
+import { useMemo } from "react";
 
 type Props = {
   chats: Chat[];
@@ -16,14 +17,16 @@ export default function ChatList({ chats, activeChatId, onSelect }: Props) {
       </div>
   );
 }
- const sortedChats = [...chats].sort((a, b) => {
+ const sortedChats = useMemo(() => {
+  return [...chats].sort((a, b) => {
     if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
+}, [chats]);
 
 return (
   <div className="space-y-1 px-2">
-    {chats.map((chat) => (
+    {sortedChats.map((chat) => (
       <Link
           key={chat.id}
           to="/chats"
