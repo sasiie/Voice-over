@@ -18,10 +18,8 @@ import {
   SidebarTrigger,
   SidebarFooter,
 } from "@/components/ui/sidebar";
-import { SquarePen } from "lucide-react";
-import { Header } from "@/components/ui/header";
 import ChatList from "@/components/chatList";
-import { useChats } from "../hooks/useChats";
+import { ChatsProvider, useChats } from "../hooks/useChats";
 
 import appCss from "../styles.css?url";
 
@@ -36,7 +34,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "Voice-over",
       },
     ],
     links: [
@@ -51,90 +49,20 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const { chats, activeChatId, setActiveChatId, createChat } = useChats();
+  // const { chats, activeChatId, setActiveChatId, createChat } = useChats();
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
+        <ChatsProvider>
         <SidebarProvider>
-          <div className="flex h-screen w-full">
-            <Sidebar>
-              <SidebarHeader>
-                <Link to="/">
-                  <div className="px-2 py-2 font-semibold">VOICE-OVER</div>
-                </Link>
-              </SidebarHeader>
-              <SidebarContent>
-                <SidebarGroup>
-                  <SidebarMenu>
-                    {/* <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link to="/">
-                          <SquarePen size={20} />
-                          <span className="font-medium">Börja ny chatt</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem> */}
+  <Appshell>{children}</Appshell>
+</SidebarProvider>
+          </ChatsProvider>
 
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link to="/about">
-                          {/* <SquarePen size={20} /> */}
-                          <span className="font-medium">Om oss</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  </SidebarMenu>
-                </SidebarGroup>
-
-                <SidebarGroup>
-                  <SidebarMenu>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton>Dina chattar</SidebarMenuButton>
-                      <ChatList
-                        chats={chats}
-                        activeChatId={activeChatId}
-                        onSelect={setActiveChatId}
-                      />
-                      <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                          <Link to="/chats">
-                            {/* <SquarePen size={20} /> */}
-                            <span className="font-medium">
-                              Kolla dina chattar
-                            </span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      <button
-                        className="text-white bg-cyan-600 px-3 py-2 rounded"
-                        onClick={() =>
-                          createChat(
-                            "Testchat" + new Date().toLocaleTimeString(),
-                          )
-                        }
-                      >
-                        Börja ny chatt
-                      </button>
-                    </SidebarMenuItem>
-                  </SidebarMenu>
-                </SidebarGroup>
-              </SidebarContent>
-
-              <SidebarFooter />
-            </Sidebar>
-            <div className="flex-1 flex flex-col">
-              {/* <Header /> */}
-              <main className="flex-1 p-6">
-                <SidebarTrigger />
-                {children}
-              </main>
-            </div>
-          </div>
-        </SidebarProvider>
-        <TanStackDevtools
+           <TanStackDevtools
           config={{
             position: "bottom-right",
           }}
@@ -150,3 +78,77 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+function Appshell({children}: { children: React.ReactNode }) {
+  const { chats, activeChatId, setActiveChatId } = useChats();
+  return (
+
+          <div className="flex h-screen w-full">
+            <Sidebar>
+              <SidebarHeader>
+                <Link to="/">
+                  <div className="px-2 py-2 font-semibold">VOICE-OVER</div>
+                </Link>
+              </SidebarHeader>
+              <SidebarContent>
+                <SidebarGroup>
+                  <SidebarMenu>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <Link to="/about">
+                          <span className="font-medium">Om oss</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </SidebarGroup>
+
+                <SidebarGroup>
+            <div className="px-2 pb-2 text-sm font-medium text-muted-foreground">
+                      Dina chattar
+                      </div>
+                      <ChatList
+                        chats={chats}
+                        activeChatId={activeChatId}
+                        onSelect={setActiveChatId}
+                      />
+                      <SidebarMenu className="mt-2">
+                        <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                          <Link to="/chats">
+                            <span className="font-medium">
+                              Kolla dina chattar
+                            </span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                      {/* <button
+                        className="text-white bg-cyan-600 px-3 py-2 rounded"
+                        onClick={() =>
+                          createChat(
+                            "Testchat" + new Date().toLocaleTimeString(),
+                          )
+                        }
+                      >
+                        Börja ny chatt
+                      </button> */}
+
+                  
+                  </SidebarMenu>
+                </SidebarGroup>
+              </SidebarContent>
+
+              <SidebarFooter />
+            </Sidebar>
+            <div className="flex-1 flex flex-col">
+             
+              <main className="flex-1 p-6">
+                <SidebarTrigger />
+                {children}
+              </main>
+            </div>
+          </div>
+      
+                      );
+                    }
+       

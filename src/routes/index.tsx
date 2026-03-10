@@ -1,16 +1,18 @@
 import { useState } from "react";
 import AudioFileUpload from "@/components/AudioFileUpload";
-import Button from "@/components/Button";
-import { createFileRoute } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { transcribeSpeech } from "@/data/speechToText";
 import languages from "@/data/languages";
+import { useChats } from "@/hooks/useChats";
 
 import { Route as RouteIcon, Volume2, FolderKanban } from "lucide-react";
-
 
 export const Route = createFileRoute("/")({ component: App });
 
 function App() {
+  const navigate = useNavigate();
+  const { createChat } = useChats();
   const features = [
     {
       icon: <Volume2 className="w-12 h-12 text-cyan-400" />,
@@ -35,18 +37,32 @@ function App() {
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState("");
   const [language, setLanguage] = useState("sv-SE");
+  const [loading, setLoading] = useState(false);
 
   async function handleTranscribe() {
     if (!file) return;
 
     try {
+      setLoading(true);
+      setMessage("");
       const data = await transcribeSpeech(file, language);
-      setMessage(data.text ?? JSON.stringify(data, null, 2));
+
+      const transcript = data.text ?? JSON.stringify(data, null, 2);
+
+      setMessage(transcript);
+
+      createChat({
+        title: file.name,
+        transcript,
+        language,
+      });
+      navigate({ to: "/chats" });
     } catch (error) {
       setMessage("Något gick fel");
+    } finally {
+      setLoading(false);
     }
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
       <section className="relative py-20 px-6 text-center overflow-hidden">
@@ -86,13 +102,14 @@ function App() {
 
             <Button
               onClick={handleTranscribe}
-              disabled={!file}
+              disabled={!file || loading}
               className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 disabled:opacity-50"
             >
-              Transkribera
+              {loading ? "Transkriberar..." : "Transkribera"}
             </Button>
 
-            {message && <p className="text-cyan-400 mt-4">{message}</p>}
+            {message && (
+               <p className="text-cyan-400 mt-4 max-w-3xl whitespace-pre-wrap">{message}</p>)}
             <p className="text-gray-400 text-sm">Valt språk: {language}</p>
           </div>
         </div>
