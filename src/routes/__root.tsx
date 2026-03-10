@@ -19,7 +19,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import ChatList from "@/components/chatList";
-import { useChats } from "../hooks/useChats";
+import { ChatsProvider, useChats } from "../hooks/useChats";
 
 import appCss from "../styles.css?url";
 
@@ -49,14 +49,40 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const { chats, activeChatId, setActiveChatId, createChat } = useChats();
+  // const { chats, activeChatId, setActiveChatId, createChat } = useChats();
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
+        <ChatsProvider>
         <SidebarProvider>
+  <Appshell>{children}</Appshell>
+</SidebarProvider>
+          </ChatsProvider>
+
+           <TanStackDevtools
+          config={{
+            position: "bottom-right",
+          }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function Appshell({children}: { children: React.ReactNode }) {
+  const { chats, activeChatId, setActiveChatId } = useChats();
+  return (
+
           <div className="flex h-screen w-full">
             <Sidebar>
               <SidebarHeader>
@@ -78,15 +104,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 </SidebarGroup>
 
                 <SidebarGroup>
-                  <SidebarMenu>
-                    <SidebarMenuItem>
-                      <p>Dina chattar</p>
+            <div className="px-2 pb-2 text-sm font-medium text-muted-foreground">
+                      Dina chattar
+                      </div>
                       <ChatList
                         chats={chats}
                         activeChatId={activeChatId}
                         onSelect={setActiveChatId}
                       />
-                      <SidebarMenuItem>
+                      <SidebarMenu className="mt-2">
+                        <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                           <Link to="/chats">
                             <span className="font-medium">
@@ -105,7 +132,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                       >
                         Börja ny chatt
                       </button> */}
-                    </SidebarMenuItem>
+
+                  
                   </SidebarMenu>
                 </SidebarGroup>
               </SidebarContent>
@@ -113,27 +141,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               <SidebarFooter />
             </Sidebar>
             <div className="flex-1 flex flex-col">
-              {/* <Header /> */}
+             
               <main className="flex-1 p-6">
                 <SidebarTrigger />
                 {children}
               </main>
             </div>
           </div>
-        </SidebarProvider>
-        <TanStackDevtools
-          config={{
-            position: "bottom-right",
-          }}
-          plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
-        <Scripts />
-      </body>
-    </html>
-  );
-}
+      
+                      );
+                    }
+       
