@@ -2,7 +2,6 @@ import { useRef, useState, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/ui/empty";
 
-// Denna kan vi tabort och använda empty.tsx i ui mappen. den är exakt en sådan här bara att de är en färdig komponent som vi tar från komponentbiblioteket
 type AudioFileUploadProps = {
   onFileSelect?: (file: File | null) => void;
 };
@@ -35,6 +34,7 @@ export default function AudioFileUpload({
       <Button
         type="button"
         onClick={openFilePicker}
+        aria-label="Ladda upp en ljudfil"
         className="px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
       >
         Ladda upp ljudfil
@@ -46,9 +46,10 @@ export default function AudioFileUpload({
         accept=".wav,audio/wav"
         onChange={handleChange}
         className="hidden"
+        aria-label="Välj ljudfil"
       />
 
-      <p className="text-gray-400 text-sm">
+      <p className="text-gray-400 text-sm" aria-live="polite">
         {fileName ? `Vald fil: ${fileName}` : "Ingen fil vald"}
       </p>
     </Empty>

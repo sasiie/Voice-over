@@ -12,7 +12,7 @@ export async function transcribeSpeech(file: File, language: string) {
   });
 
   const data = await response.json();
-  console.log("API RESPONSE:", data); // 👈 VIKTIGT
+  console.log("API RESPONSE:", data);
 
   if (!response.ok) {
     throw new Error("Transcription failed");
