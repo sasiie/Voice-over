@@ -39,7 +39,7 @@ function ChatsPage() {
 
                 <div className="bg-gray-800 rounded-xl p-6">
                   {!activeChat ? (
-                    <p className="text-gray-400">Vaälj en chat i listan.</p>
+                    <p className="text-gray-400">Välj en chat i listan.</p>
                   ) : (
                     <>
 <div className="flex items-start justify-between gap-4 mb-4">

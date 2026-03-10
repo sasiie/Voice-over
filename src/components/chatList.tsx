@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Chat } from "../hooks/useChats";
 
 type Props = {
@@ -17,14 +18,18 @@ export default function ChatList({ chats, activeChatId, onSelect }: Props) {
 return (
   <div className="space-y-1 px-2">
     {chats.map((chat) => (
-      <button
+      <Link
           key={chat.id}
+          to="/chats"
           onClick={() => onSelect(chat.id)}
           className={`w-full text-left px-3 py-2 rounded-lg transition 
     ${chat.id === activeChatId ? "bg-white/10" : "hover:bg-slate-800"}`}
         >
           <div className="truncate font-medium">{chat.title}</div>
-        </button>
+          <div className="truncate text-xs text-slate-400">
+            {chat.transcript}
+            </div>
+        </Link>
       ))}
     </div>
   );

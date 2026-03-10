@@ -57,12 +57,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ChatsProvider>
-        <SidebarProvider>
-  <Appshell>{children}</Appshell>
-</SidebarProvider>
-          </ChatsProvider>
+          <SidebarProvider>
+            <Appshell>{children}</Appshell>
+          </SidebarProvider>
+        </ChatsProvider>
 
-           <TanStackDevtools
+        <TanStackDevtools
           config={{
             position: "bottom-right",
           }}
@@ -79,50 +79,47 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Appshell({children}: { children: React.ReactNode }) {
+function Appshell({ children }: { children: React.ReactNode }) {
   const { chats, activeChatId, setActiveChatId } = useChats();
   return (
+    <div className="flex h-screen w-full">
+      <Sidebar>
+        <SidebarHeader>
+          <Link to="/">
+            <div className="px-2 py-2 font-semibold">VOICE-OVER</div>
+          </Link>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/about">
+                    <span className="font-medium">Om oss</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
 
-          <div className="flex h-screen w-full">
-            <Sidebar>
-              <SidebarHeader>
-                <Link to="/">
-                  <div className="px-2 py-2 font-semibold">VOICE-OVER</div>
-                </Link>
-              </SidebarHeader>
-              <SidebarContent>
-                <SidebarGroup>
-                  <SidebarMenu>
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
-                        <Link to="/about">
-                          <span className="font-medium">Om oss</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  </SidebarMenu>
-                </SidebarGroup>
-
-                <SidebarGroup>
+          <SidebarGroup>
             <div className="px-2 pb-2 text-sm font-medium text-muted-foreground">
-                      Dina chattar
-                      </div>
-                      <ChatList
-                        chats={chats}
-                        activeChatId={activeChatId}
-                        onSelect={setActiveChatId}
-                      />
-                      <SidebarMenu className="mt-2">
-                        <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                          <Link to="/chats">
-                            <span className="font-medium">
-                              Kolla dina chattar
-                            </span>
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                      {/* <button
+              Dina chattar
+            </div>
+            <ChatList
+              chats={chats}
+              activeChatId={activeChatId}
+              onSelect={setActiveChatId}
+            />
+            <SidebarMenu className="mt-2">
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/chats">
+                    <span className="font-medium">Kolla dina chattar</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {/* <button
                         className="text-white bg-cyan-600 px-3 py-2 rounded"
                         onClick={() =>
                           createChat(
@@ -132,23 +129,18 @@ function Appshell({children}: { children: React.ReactNode }) {
                       >
                         Börja ny chatt
                       </button> */}
+            </SidebarMenu>
+          </SidebarGroup>
+        </SidebarContent>
 
-                  
-                  </SidebarMenu>
-                </SidebarGroup>
-              </SidebarContent>
-
-              <SidebarFooter />
-            </Sidebar>
-            <div className="flex-1 flex flex-col">
-             
-              <main className="flex-1 p-6">
-                <SidebarTrigger />
-                {children}
-              </main>
-            </div>
-          </div>
-      
-                      );
-                    }
-       
+        <SidebarFooter />
+      </Sidebar>
+      <div className="flex-1 flex flex-col">
+        <main className="flex-1 p-6">
+          <SidebarTrigger />
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}
