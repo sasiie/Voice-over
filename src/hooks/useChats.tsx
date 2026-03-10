@@ -95,26 +95,7 @@ export function ChatsProvider({ children }: { children: React.ReactNode }) {
     () => chats.find((chat) => chat.id === activeChatId) ?? null,
     [chats, activeChatId],
   );
-  //   function toggleFavorite(id:string) {
-  //     setChats((prev) =>
-  //     prev.map((chat) =>
-  //     chat.id === id ? {...chat, favorite: !chat.favorite } : chat
-  //   )
-  // );
-  //   }
-  //   function toggleImportant(id: string){
-  //     setChats((prev) =>
-  //     prev.map((chat) =>
-  //     chat.id === id ? {...chat, important: !chat.important } : chat
-  //   )
-  // );
-  //   }
-  //   function updateChatTranscript(id: string, transcript: string) {
-  //     setChats((prev) =>
-  //     prev.map((chat) =>
-  //     chat.id === id ? {...chat, transcript } : chat
-  //   )
-  // ); }
+
 function toggleFavorite(id: string) {
   setChats((prev) =>
     prev.map((chat) =>
