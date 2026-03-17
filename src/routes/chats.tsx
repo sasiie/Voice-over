@@ -17,15 +17,15 @@ function ChatsPage() {
     toggleFavorite,
     togglePinned,
   } = useChats();
-const favoriteChats = useMemo(
-  () => chats.filter((chat) => chat.favorite),
-  [chats]
-);
+  const favoriteChats = useMemo(
+    () => chats.filter((chat) => chat.favorite),
+    [chats],
+  );
 
-const pinnedChats = useMemo(
-  () => chats.filter((chat) => chat.pinned),
-  [chats]
-);
+  const pinnedChats = useMemo(
+    () => chats.filter((chat) => chat.pinned),
+    [chats],
+  );
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <h1 className="text-3xl font-bold mb-6">Dina chattar</h1>
@@ -68,21 +68,21 @@ const pinnedChats = useMemo(
                       {new Date(activeChat.createdAt).toLocaleString("sv-SE")}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    {" "}
                     <Button
                       variant="outline"
                       size="sm"
-                        aria-label="Favoritisera chatten"
+                      aria-label="Favoritisera chatten"
                       onClick={() => toggleFavorite(activeChat.id)}
                     >
                       <Star size={16} />
                       Favorit
                     </Button>
-
                     <Button
                       variant="outline"
                       size="sm"
-                        aria-label="Pinna chatten"
+                      aria-label="Pinna chatten"
                       onClick={() => togglePinned(activeChat.id)}
                     >
                       <Pin size={16} />
@@ -91,7 +91,7 @@ const pinnedChats = useMemo(
                     <Button
                       variant="destructive"
                       size="sm"
-                        aria-label="Radera chatten"
+                      aria-label="Radera chatten"
                       onClick={() => deleteChat(activeChat.id)}
                     >
                       <Trash2 size={16} />

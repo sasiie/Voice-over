@@ -49,7 +49,6 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  // const { chats, activeChatId, setActiveChatId, createChat } = useChats();
   return (
     <html lang="en">
       <head>

@@ -109,7 +109,7 @@ function App() {
             </Button>
 
             {message && (
-               <p className="text-cyan-400 mt-4 max-w-3xl whitespace-pre-wrap">{message}</p>)}
+               <p className="text-cyan-400 mt-4 max-w-3xl whitespace-pre-wrap" aria-live="polite">{message}</p>)}
             <p className="text-gray-400 text-sm">Valt språk: {language}</p>
           </div>
         </div>
